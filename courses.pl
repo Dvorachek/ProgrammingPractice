@@ -1,5 +1,3 @@
-%TEST
-
 :-style_check(-singleton).
 
 degreereq(X):- mathreq(X), csreq(X), engreq(X), elecreq(X).
