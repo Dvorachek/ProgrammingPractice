@@ -1,14 +1,17 @@
 {-
-	Factorial
+    Factorial
 -}
 
-factorial x =
-	if x == 0
-		then 1
-	else
-		x * factorial (x-1)
+factorial1 x =
+    if x == 0
+        then 1
+    else
+        x * factorial1 (x-1)
 
-factorial2 x = product[1..x]
-		
+factorial2 0 = 1
+factorial2 x = x * factorial2 (x-1)
+
+factorial3 x = product[1..x]
+        
 main =
-	print (factorial 5)
+    print (factorial2 5)
