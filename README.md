@@ -1,2 +1,1 @@
-# CSC330
-Programming practice in Haskell, Go and Prolog
+# Programming Practice in Prolog, Go, Haskell and Python
