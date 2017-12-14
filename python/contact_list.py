@@ -1,5 +1,11 @@
 # https://www.hackerrank.com/challenges/ctci-contacts/problem
 
+# run python contact_list.py
+# enter "<int>" being the number of commands to be given
+# enter "add <name>" to add a name to the contact list
+# enter "find <keyword>" to search for contacts starting with the keyword
+
+
 def partials(contact):
     return [contact[0:i] for i in xrange(1, len(contact) + 1)]
     
@@ -10,7 +16,7 @@ def find(word):
 def add(word):
     for token in partials(word):
         contacts[token] = contacts.get(token, 0) + 1
-            
+
 
 n = int(raw_input().strip())
 t = {}
