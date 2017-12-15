@@ -23,7 +23,7 @@ len([_|L], N):- len(L, N1), N is N1 + 1.
 
 alldif([]).
 alldif([_]).
-alldif([X1,X2|Xs]):- dif(X1, X2), alldif([X1|Xs]), alldif([X2|Xs]).
+alldif([X1, X2|Xs]):- dif(X1, X2), alldif([X1|Xs]), alldif([X2|Xs]).
 
 % Mergesort
 merge([], [], []).
@@ -35,3 +35,12 @@ merge([X|Xs], [Y|Ys], [Y|L]):- X > Y, merge([X|Xs], Ys, L).
 insert(X, [], [X]).
 insert(X, [Head|Tail], [Head|Rest]):- X > Head, insert(X, Tail, Rest).
 insert(X, [Head|Tail], [X, Head|Tail]):- X =< Head.
+
+% where U delimits S within L
+delimit(U, S, L):- concat(_, [U|S], M), concat(M, [U|_], L).
+
+enclose(S, L):- concat(S, _, M), concat(M, S, L).
+
+sort2([], []).
+sort2(L, L).
+sort2([X|L1], L2):- insert(X, L, L2), sort2(L1, L).
