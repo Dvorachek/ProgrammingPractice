@@ -28,6 +28,9 @@ member1 x l =
 power 1 f = f
 power n f = f . (power (n-1) f)
 
+--flatten1 :: [[a]] -> [a]
+flatten1 l = reduce1 (++) l []
+
 main = do
     -- sum the squares of a list
     print (reduce1 (+) (map1 (\n -> n * n) [1..10]) 0)
@@ -44,3 +47,6 @@ main = do
     
     -- power testing
     print (power 4 (\n -> n * n) 2)
+    
+    -- flatten a list of lists
+    print (flatten1 [[1],[2,3],[4]])
