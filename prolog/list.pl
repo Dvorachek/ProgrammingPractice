@@ -2,83 +2,35 @@
 
 :-style_check(-singleton).
 
+% Concatenates two lists together
 concat([], Li, Li).
 concat([Head|Tail], Li, [Head|Rest]):- concat(Tail, Li, Rest).
 
-subset(X, Y):- concat(X, _, Y).
-subset(X, [Y|Ys]):- subset(X, Ys).
+% List S is a subset of L
+subset(S, L):- concat(_, S, M), concat(M, _, L).
 
-% Or in one line
-sublist(S, L):- concat(_, S, M), concat(M, _, L).
-
+% Element X is a member 
 member(X, List):- concat(_, [X|_], List).
 
+% True if the lists are the reverse of each other
 reverse([], []).
 reverse([X|Xs], Y):- reverse(Xs, XsY), concat(XsY, [X], Y).
 
+% Is list X a palindrome
 palindrome(X):- reverse(X, X).
 
+% N is the length of list L
 len([], 0).
 len([_|L], N):- len(L, N1), N is N1 + 1.
 
-alldif([]).
-alldif([_]).
-alldif([X1, X2|Xs]):- dif(X1, X2), alldif([X1|Xs]), alldif([X2|Xs]).
-
-% Mergesort
-merge([], [], []).
-merge(L, [], L).
-merge([], L, L).
-merge([X|Xs], [Y|Ys], [X|L]):- X =< Y, merge(Xs, [Y|Ys], L).
-merge([X|Xs], [Y|Ys], [Y|L]):- X > Y, merge([X|Xs], Ys, L).
-
-insert(X, [], [X]).
-insert(X, [Head|Tail], [Head|Rest]):- X > Head, insert(X, Tail, Rest).
-insert(X, [Head|Tail], [X, Head|Tail]):- X =< Head.
-
-% where U delimits S within L
+% U delimits S within L
 delimit(U, S, L):- concat(_, [U|S], M), concat(M, [U|_], L).
 
+% S is the prefix and suffix of L
 enclose(S, L):- concat(S, _, M), concat(M, S, L).
 
-sort2([], []).
-sort2(L, L).
-sort2([X|L1], L2):- insert(X, L, L2), sort2(L1, L).
-
+% L is the concatination of the same list twice
 repeated(L):- concat(Ls, Ls, L).
 
+% Elements U and V are adjacent within L
 adjacent(U, V, L):- concat(_, [U, V|_], L); concat(_, [V, U|_], L).
-
-latin(X1, X2, X3, X4, X5, X6, X7, X8, X9):- 
-    X1 \= X2,
-    X1 \= X3,
-    X1 \= X4,
-    X1 \= X7,
-    X2 \= X3,
-    X2 \= X5,
-    X2 \= X8,
-    X3 \= X6,
-    X3 \= X9,
-    X4 \= X7,
-    X4 \= X5,
-    X4 \= X6,
-    X5 \= X8,
-    X5 \= X6,
-    X6 \= X9,
-    X7 \= X8,
-    X7 \= X9,
-    X8 \= X9,
-    num(X1),
-    num(X2),
-    num(X3),
-    num(X4),
-    num(X5),
-    num(X6),
-    num(X7),
-    num(X8),
-    num(X9).
-
-
-num(1).
-num(2).
-num(3).
